@@ -52,6 +52,7 @@ if choice == 'a':
     L1_fig1 = 0
     L2_fig1 = 0
     L3_fig1 = lambda3
+    phi_initial = 0
 
 elif choice == 'b':
     omega1_initial = 1
@@ -60,6 +61,7 @@ elif choice == 'b':
     L1_fig1 = lambda1
     L2_fig1 = 0
     L3_fig1 = 0
+    phi_initial = 0
 
 elif choice == 'c':
     omega1_initial = 1e-8
@@ -68,6 +70,7 @@ elif choice == 'c':
     L1_fig1 = 0
     L2_fig1 = lambda2
     L3_fig1 = 0
+    phi_initial = 0
 
 elif choice == 'd':
     print("This program supports real number entires only")
@@ -77,9 +80,7 @@ elif choice == 'd':
     L1_fig1 = float(input("lambda 1 initial value: "))
     L2_fig1 = float(input("lambda 2 initial value: "))
     L3_fig1 = float(input("lambda 3 initial value: "))
-
-# Initial value of euler angle phi of the object in body frame
-phi_initial = 0
+    phi_initial = float(input("phi initial value: "))
 
 
 ################################################
