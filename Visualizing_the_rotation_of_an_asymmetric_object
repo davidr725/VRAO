@@ -27,14 +27,13 @@ import datetime
 lambda1, lambda2, lambda3 = 1, 2, 3
 
 
-# Allow the user to easily choose from a set of
-# initial angular velocities
-print("Choose a set of initial angular velocities:")
+# Allow the user to easily choose from a set of initial conditions
+print("Choose a set of initial conditions:")
 print("")
-print("a: omega1(0) = .01, omega2(t) = .1, omega3(0) = 1")
-print("b: omega1(0) = 1, omega2(t) = .1, omega3(0) = .01")
-print("c: omega1(0) = 10^-8, omega2(t) = 1, omega3(0) = 10^-3")
-print("d: choose your own values for omega and lamdba 1 2 & 3")
+print("a: omega1(0) = .01, omega2(t) = .1, omega3(0) = 1, l3 = " + str(lambda3))
+print("b: omega1(0) = 1, omega2(t) = .1, omega3(0) = .01, l1 = " + str(lambda1))
+print("c: omega1(0) = 10^-8, omega2(t) = 1, omega3(0) = 10^-3, l2 = " + str(lambda2))
+print("d: choose your own values for omega and lambda 1 2 & 3")
 print("")
 print("type 'a', 'b', 'c', or 'd' to select one of the options")
 choice = input()
