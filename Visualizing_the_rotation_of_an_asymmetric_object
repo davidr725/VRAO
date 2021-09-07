@@ -12,11 +12,11 @@
 ###############################################################################
 
 
+import datetime
 import numpy as np
 from mayavi import mlab
 import vpython as vp
 import matplotlib.pyplot as plt
-import datetime
 
 
 ################################################
@@ -30,10 +30,20 @@ lambda1, lambda2, lambda3 = 1, 2, 3
 # Allow the user to easily choose from a set of initial conditions
 print("Choose a set of initial conditions:")
 print("")
-print("a: omega1(0) = .01, omega2(t) = .1, omega3(0) = 1, l3 = " + str(lambda3))
-print("b: omega1(0) = 1, omega2(t) = .1, omega3(0) = .01, l1 = " + str(lambda1))
-print("c: omega1(0) = 10^-8, omega2(t) = 1, omega3(0) = 10^-3, l2 = " + str(lambda2))
-print("d: choose your own values for omega and lambda 1 2 & 3")
+print("a:")
+print("omega1(0) = .01, omega2(t) = .1, omega3(0) = 1")
+print("l1 = 0, l2 = 0, l3 = " + str(lambda3))
+print("")
+print("b:")
+print("omega1(0) = 1, omega2(t) = .1, omega3(0) = .01")
+print("l1 = " + str(lambda1) + " , l2 = 0, l3 = 0")
+print("")
+print("c:")
+print("omega1(0) = 10^-8, omega2(t) = 1, omega3(0) = 10^-3")
+print("l1 = 0, l2 = " + str(lambda2) + " , l3 = 0")
+print("")
+print("d:")
+print("choose your own values for omegas, lambdas, and phi")
 print("")
 print("type 'a', 'b', 'c', or 'd' to select one of the options")
 choice = input()
@@ -306,15 +316,30 @@ mlab.mesh(Lx_Ellipsoid, Ly_Ellipsoid, Lz_Ellipsoid,
 mlab.show()
 
 
-# Use Matplotlib to show relationship between l2 and time for Fig 8
-if choice != 'd':
+# Use Matplotlib to show relationship between l and time for Fig 8
+if choice == 'a':
+    plt.plot(tpoints, l3_hat, label='l3', color='green')
+    plt.title('l3 vs t')
+    plt.xlabel('time')
+    plt.ylabel('l3')
+    plt.legend()
+    plt.show()
+
+if choice == 'b':
+    plt.plot(tpoints, l1_hat, label='l1', color='green')
+    plt.title('l1 vs t')
+    plt.xlabel('time')
+    plt.ylabel('l1')
+    plt.legend()
+    plt.show()
+
+if choice == 'c':
     plt.plot(tpoints, l2_hat, label='l2', color='green')
     plt.title('l2 vs t')
     plt.xlabel('time')
     plt.ylabel('l2')
     plt.legend()
     plt.show()
-
 
 ###############################################
 #           ANIMATIONS WITH VPYTHON           #
