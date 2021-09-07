@@ -4,6 +4,9 @@
 # This code was written to accompany the paper                                #
 # "Visualizing the Rotation of an Asymmetric Object"                          #
 #                                                                             #
+# This code was written by David A. Ramirez                                   #
+# <david.ramirez4@mail.citytech.cuny.edu>                                     #
+#                                                                             #
 # ATTN: WIN10 USERS                                                           #
 # VPYTHON CAN OCCASSIONALLY HANG WHEN CLOSING YOUR BROWSER                    #
 ###############################################################################
@@ -29,15 +32,12 @@ print("Choose a set of initial conditions:")
 print("")
 print("a:")
 print("omega1(0) = .01, omega2(t) = .1, omega3(0) = 1")
-print("l1 = 0, l2 = 0, l3 = " + str(lambda3))
 print("")
 print("b:")
 print("omega1(0) = 1, omega2(t) = .1, omega3(0) = .01")
-print("l1 = " + str(lambda1) + " , l2 = 0, l3 = 0")
 print("")
 print("c:")
 print("omega1(0) = 10^-8, omega2(t) = 1, omega3(0) = 10^-3")
-print("l1 = 0, l2 = " + str(lambda2) + " , l3 = 0")
 print("")
 print("d:")
 print("choose your own values for omegas, lambdas, and phi")
