@@ -23,26 +23,26 @@ import matplotlib.pyplot as plt
 #              INITIAL CONDITIONS              #
 ################################################
 
-# Moments of inertia with respect to the principle axes of the body
-lambda1, lambda2, lambda3 = 1, 2, 3
-
 
 # Allow the user to easily choose from a set of initial conditions
 print("Choose a set of initial conditions:")
 print("")
 print("a:")
 print("omega1(0) = .01, omega2(t) = .1, omega3(0) = 1")
+print("lambda1 = 1, lambda2 = 2, lambda3 = 3")
 print("")
 print("b:")
 print("omega1(0) = 1, omega2(t) = .1, omega3(0) = .01")
+print("lambda1 = 1, lambda2 = 2, lambda3 = 3")
 print("")
 print("c:")
 print("omega1(0) = 10^-8, omega2(t) = 1, omega3(0) = 10^-3")
+print("lambda1 = 1, lambda2 = 2 lambda3 = 3")
 print("")
 print("d:")
 print("choose your own values for omegas, lambdas, and phi")
 print("")
-print("type 'a', 'b', 'c', or 'd' to select one of the options")
+print("Type 'a', 'b', 'c', or 'd' to select one of the options")
 choice = input()
 
 
@@ -55,37 +55,32 @@ if choice == 'a':
     omega1_initial = .01
     omega2_initial = .1
     omega3_initial = 1
-    L1_fig1 = 0
-    L2_fig1 = 0
-    L3_fig1 = lambda3
     phi_initial = 0
+    lambda1, lambda2, lambda3 = 1, 2, 3
 
 elif choice == 'b':
     omega1_initial = 1
     omega2_initial = .1
     omega3_initial = .01
-    L1_fig1 = lambda1
-    L2_fig1 = 0
-    L3_fig1 = 0
     phi_initial = 0
+    lambda1, lambda2, lambda3 = 1, 2, 3
 
 elif choice == 'c':
     omega1_initial = 1e-8
     omega2_initial = 1
     omega3_initial = 1e-3
-    L1_fig1 = 0
-    L2_fig1 = lambda2
-    L3_fig1 = 0
     phi_initial = 0
+    lambda1, lambda2, lambda3 = 1, 2, 3
 
 elif choice == 'd':
+    print("")
     print("This program supports real number entires only")
     omega1_initial = float(input("omega 1 initial value: "))
     omega2_initial = float(input("omega 2 initial value: "))
     omega3_initial = float(input("omega 3 initial value: "))
-    L1_fig1 = float(input("lambda 1 initial value: "))
-    L2_fig1 = float(input("lambda 2 initial value: "))
-    L3_fig1 = float(input("lambda 3 initial value: "))
+    lambda1 = float(input("lambda 1 initial value: "))
+    lambda2 = float(input("lambda 2 initial value: "))
+    lambda3 = float(input("lambda 3 initial value: "))
     phi_initial = float(input("phi initial value: "))
 
 
@@ -284,59 +279,139 @@ Rz = np.cos(theta)
 
 
 ###############################################
-#      PLOTS OF ELLIPSOIDS & l2 VS TIME       #
+#      PLOTS OF ELLIPSOIDS & l VS TIME       #
 ###############################################
 
 
-# Use Mayavi to plot the ellipsoids in Fig 1
-mlab.figure(bgcolor=(1, 1, 1))
-mlab.points3d(L1_fig1/L_magnitude, L2_fig1/L_magnitude, L3_fig1/L_magnitude,
-              color=(1, 0, 0), scale_factor=.1)
-mlab.points3d(-L1_fig1/L_magnitude, -L2_fig1/L_magnitude, -L3_fig1/L_magnitude,
-              color=(1, 0, 0), scale_factor=.1)
-mlab.mesh(Kx_Ellipsoid, Ky_Ellipsoid, Kz_Ellipsoid,
-          color=(1, .643, .282), opacity=.75)
-mlab.mesh(Lx_Ellipsoid, Ly_Ellipsoid, Lz_Ellipsoid,
-          color=(0, .510, .753), opacity=.75)
-mlab.show()
-
-
-# Use Mayavi to plot the ellipsoids in Figs 2, 3, 4
-mlab.clf
-mlab.figure(bgcolor=(1, 1, 1))
-mlab.plot3d(l1_hat, l2_hat, l3_hat, color=(1, 0, 0))
-mlab.plot3d(-l1_hat, -l2_hat, -l3_hat, color=(1, 0, 0))
-mlab.mesh(Kx_Ellipsoid, Ky_Ellipsoid, Kz_Ellipsoid,
-          color=(1, .643, .282))
-mlab.mesh(Lx_Ellipsoid, Ly_Ellipsoid, Lz_Ellipsoid,
-          color=(0, .510, .753))
-mlab.show()
-
-
-# Use Matplotlib to show relationship between l and time for Fig 8
 if choice == 'a':
+
+    # Fig 1
+    mlab.figure(bgcolor=(1, 1, 1))
+    mlab.points3d(0, 0, 1, color=(1, 0, 0), scale_factor=.1)
+    mlab.points3d(0, 0, -1, color=(1, 0, 0), scale_factor=.1)
+    mlab.mesh(Kx_Ellipsoid, Ky_Ellipsoid, Kz_Ellipsoid,
+              color=(1, .643, .282), opacity=.75)
+    mlab.mesh(Lx_Ellipsoid, Ly_Ellipsoid, Lz_Ellipsoid,
+              color=(0, .510, .753), opacity=.75)
+    mlab.show()
+
+    # Fig 4
+    mlab.clf
+    mlab.figure(bgcolor=(1, 1, 1))
+    mlab.plot3d(l1_hat, l2_hat, l3_hat, color=(1, 0, 0))
+    mlab.plot3d(-l1_hat, -l2_hat, -l3_hat, color=(1, 0, 0))
+    mlab.mesh(Kx_Ellipsoid, Ky_Ellipsoid, Kz_Ellipsoid,
+              color=(1, .643, .282))
+    mlab.mesh(Lx_Ellipsoid, Ly_Ellipsoid, Lz_Ellipsoid,
+              color=(0, .510, .753))
+    mlab.show()
+
+    # Fig 8
     plt.plot(tpoints, l3_hat, label='l3', color='green')
     plt.title('l3 vs t')
-    plt.xlabel('time')
+    plt.xlabel('time (seconds)')
     plt.ylabel('l3')
+    plt.ylim(-1, 1)
     plt.legend()
     plt.show()
 
 if choice == 'b':
+
+    # Fig 1
+    mlab.figure(bgcolor=(1, 1, 1))
+    mlab.points3d(1, 0, 0, color=(1, 0, 0), scale_factor=.1)
+    mlab.points3d(1, 0, 0, color=(1, 0, 0), scale_factor=.1)
+    mlab.mesh(Kx_Ellipsoid, Ky_Ellipsoid, Kz_Ellipsoid,
+              color=(1, .643, .282), opacity=.75)
+    mlab.mesh(Lx_Ellipsoid, Ly_Ellipsoid, Lz_Ellipsoid,
+              color=(0, .510, .753), opacity=.75)
+    mlab.show()
+
+    # Fig 5
+    mlab.clf
+    mlab.figure(bgcolor=(1, 1, 1))
+    mlab.plot3d(l1_hat, l2_hat, l3_hat, color=(1, 0, 0))
+    mlab.plot3d(-l1_hat, -l2_hat, -l3_hat, color=(1, 0, 0))
+    mlab.mesh(Kx_Ellipsoid, Ky_Ellipsoid, Kz_Ellipsoid,
+              color=(1, .643, .282))
+    mlab.mesh(Lx_Ellipsoid, Ly_Ellipsoid, Lz_Ellipsoid,
+              color=(0, .510, .753))
+    mlab.show()
+
+    # Fig 8
     plt.plot(tpoints, l1_hat, label='l1', color='green')
     plt.title('l1 vs t')
-    plt.xlabel('time')
+    plt.xlabel('time (seconds)')
     plt.ylabel('l1')
+    plt.ylim(-1, 1)
     plt.legend()
     plt.show()
 
 if choice == 'c':
+
+    # Fig 1
+    mlab.figure(bgcolor=(1, 1, 1))
+    mlab.points3d(0, 1, 0, color=(1, 0, 0), scale_factor=.1)
+    mlab.points3d(0, 1, 0, color=(1, 0, 0), scale_factor=.1)
+    mlab.mesh(Kx_Ellipsoid, Ky_Ellipsoid, Kz_Ellipsoid,
+              color=(1, .643, .282), opacity=.75)
+    mlab.mesh(Lx_Ellipsoid, Ly_Ellipsoid, Lz_Ellipsoid,
+              color=(0, .510, .753), opacity=.75)
+    mlab.show()
+
+    # Fig 4
+    mlab.clf
+    mlab.figure(bgcolor=(1, 1, 1))
+    mlab.plot3d(l1_hat, l2_hat, l3_hat, color=(1, 0, 0))
+    mlab.plot3d(-l1_hat, -l2_hat, -l3_hat, color=(1, 0, 0))
+    mlab.mesh(Kx_Ellipsoid, Ky_Ellipsoid, Kz_Ellipsoid,
+              color=(1, .643, .282))
+    mlab.mesh(Lx_Ellipsoid, Ly_Ellipsoid, Lz_Ellipsoid,
+              color=(0, .510, .753))
+    mlab.show()
+
+    # Fig 8
     plt.plot(tpoints, l2_hat, label='l2', color='green')
     plt.title('l2 vs t')
-    plt.xlabel('time')
+    plt.xlabel('time (seconds)')
     plt.ylabel('l2')
+    plt.ylim(-1, 1)
     plt.legend()
     plt.show()
+
+
+if choice == 'd':
+
+    # Fig 1
+    mlab.figure(bgcolor=(1, 1, 1))
+    mlab.mesh(Kx_Ellipsoid, Ky_Ellipsoid, Kz_Ellipsoid,
+              color=(1, .643, .282), opacity=.75)
+    mlab.mesh(Lx_Ellipsoid, Ly_Ellipsoid, Lz_Ellipsoid,
+              color=(0, .510, .753), opacity=.75)
+    mlab.show()
+
+    # Fig 4
+    mlab.clf
+    mlab.figure(bgcolor=(1, 1, 1))
+    mlab.plot3d(l1_hat, l2_hat, l3_hat, color=(1, 0, 0))
+    mlab.plot3d(-l1_hat, -l2_hat, -l3_hat, color=(1, 0, 0))
+    mlab.mesh(Kx_Ellipsoid, Ky_Ellipsoid, Kz_Ellipsoid,
+              color=(1, .643, .282))
+    mlab.mesh(Lx_Ellipsoid, Ly_Ellipsoid, Lz_Ellipsoid,
+              color=(0, .510, .753))
+    mlab.show()
+
+    # Fig 8
+    plt.plot(tpoints, l1_hat, label='l1', color='red')
+    plt.plot(tpoints, l2_hat, label='l2', color='green')
+    plt.plot(tpoints, l3_hat, label='l3', color='blue')
+    plt.title('l vs t')
+    plt.xlabel('time (seconds)')
+    plt.ylabel('l')
+    plt.ylim(-1, 1)
+    plt.legend()
+    plt.show()
+
 
 ###############################################
 #           ANIMATIONS WITH VPYTHON           #
