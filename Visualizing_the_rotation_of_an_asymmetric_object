@@ -4,7 +4,7 @@
 # This code was written to accompany the paper                                #
 # "Visualizing the Rotation of an Asymmetric Object"                          #
 #                                                                             #
-# ATTN: IF YOU USE WIN10 WITH CHROME                                          #
+# ATTN: IF YOU USE WIN10 AND CHROME (BOTH)                                    #
 # VPYTHON CAN OCCASSIONALLY HANG WHEN EXITING CHROME                          #
 ###############################################################################
 
@@ -459,7 +459,6 @@ Rx = np.sin(theta)*np.sin(phi)
 Ry = -(np.sin(theta)*np.cos(phi))
 Rz = np.cos(theta)
 
-
 ###############################################
 #           ANIMATIONS WITH VPYTHON           #
 ###############################################
@@ -572,7 +571,7 @@ vp.sleep(1)
 i = 0
 while i < iterations:
     if running is True:
-        vp.rate(60)
+        vp.rate(1000)
         r1 = vp.vector(Px[i], Py[i], Pz[i])
         r2 = vp.vector(Qx[i], Qy[i], Qz[i])
         r3 = vp.vector(Rx[i], Ry[i], Rz[i])
@@ -593,7 +592,7 @@ while i < iterations:
         p_hat_trail.pos = r1
         q_hat_trail.pos = r2
         r_hat_trail.pos = r3
-        i += 20
+        i += 1
     else:
         pass
 
